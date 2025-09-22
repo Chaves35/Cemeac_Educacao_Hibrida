@@ -1,20 +1,18 @@
-// backend/database/seeders/SchoolSeeder.php
 <?php
 
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use App\Models\School;
 
 class SchoolSeeder extends Seeder
 {
     public function run(): void
     {
-        // Limpar dados existentes na tabela schools
+        // Limpar dados existentes
         School::query()->delete();
 
-        // Definir escolas de exemplo para seed
+        // Escolas de exemplo
         $schools = [
             [
                 'name' => 'CEMEAC - Unidade Central',
@@ -29,10 +27,19 @@ class SchoolSeeder extends Seeder
                 'address' => 'Avenida Secundária, 250',
                 'city' => 'Campinas',
                 'state' => 'SP'
+            ],
+            [
+                'name' => 'CEMEAC - Unidade Sul',
+                'inep_code' => '45678912',
+                'address' => 'Praça da Educação, 350',
+                'city' => 'Santos',
+                'state' => 'SP'
             ]
         ];
 
-        // Inserir escolas no banco de dados
-        School::insert($schools);
+        // Criar escolas usando create
+        foreach ($schools as $schoolData) {
+            School::create($schoolData);
+        }
     }
 }

@@ -1,5 +1,4 @@
-// backend/app/Providers/AppServiceProvider.php
-<?php
+<?php  // CERTIFIQUE-SE DE QUE ESTA LINHA ESTÁ NO TOPO, SEM ESPAÇOS OU LINHAS ANTES
 
 namespace App\Providers;
 

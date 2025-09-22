@@ -1,4 +1,3 @@
-// backend/app/Models/School.php
 <?php
 
 namespace App\Models;

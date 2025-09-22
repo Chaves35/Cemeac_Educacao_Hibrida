@@ -1,8 +1,9 @@
-// backend/app/Providers/AuthServiceProvider.php
 <?php
 
 namespace App\Providers;
 
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use App\Models\School;
 use App\Models\Activity;
@@ -15,7 +16,6 @@ use App\Policies\ActivityPolicy;
 use App\Policies\ContentPolicy;
 use App\Policies\ForumPostPolicy;
 use App\Policies\StudentActivityPolicy;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
