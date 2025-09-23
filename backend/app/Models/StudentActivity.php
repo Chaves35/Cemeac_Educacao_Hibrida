@@ -1,4 +1,3 @@
-// backend/app/Models/StudentActivity.php
 <?php
 
 namespace App\Models;

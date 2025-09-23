@@ -1,4 +1,3 @@
-// backend/app/Models/Content.php
 <?php
 
 namespace App\Models;

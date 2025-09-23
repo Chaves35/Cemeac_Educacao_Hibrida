@@ -1,4 +1,3 @@
-// backend/app/Policies/ForumPostPolicy.php
 <?php
 
 namespace App\Policies;

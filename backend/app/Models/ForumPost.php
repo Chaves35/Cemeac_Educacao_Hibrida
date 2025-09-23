@@ -1,4 +1,3 @@
-///ForumPost.php
 <?php
 
 namespace App\Models;

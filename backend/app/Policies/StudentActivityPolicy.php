@@ -1,4 +1,3 @@
-// backend/app/Policies/StudentActivityPolicy.php
 <?php
 
 namespace App\Policies;

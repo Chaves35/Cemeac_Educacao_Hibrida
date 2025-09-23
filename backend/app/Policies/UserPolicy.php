@@ -1,4 +1,3 @@
-// app/Policies/SchoolPolicy.php
 <?php
 
 namespace App\Policies;

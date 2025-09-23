@@ -1,4 +1,3 @@
-// backend/app/Policies/ActivityPolicy.php
 <?php
 
 namespace App\Policies;

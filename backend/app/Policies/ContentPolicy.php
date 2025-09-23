@@ -1,4 +1,3 @@
-// backend/app/Policies/ContentPolicy.php
 <?php
 
 namespace App\Policies;
