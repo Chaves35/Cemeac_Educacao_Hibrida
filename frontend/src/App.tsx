@@ -1,38 +1,52 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from './contexts/AuthContext';
+import { Routes, Route, Link } from "react-router-dom"
+import { useAuth } from "./contexts/AuthContext"
+import { PrivateRoute } from "./components/PrivateRoute"
 
-// Páginas (crie placeholders por enquanto)
-const Login = () => <div>Login Page</div>;
-const Dashboard = () => <div>Dashboard</div>;
-const NotFound = () => <div>404 - Página não encontrada</div>;
+// Páginas
+import Login from "./pages/Login"
+import Dashboard from "./pages/Dashboard"
 
-const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { user, loading } = useAuth();
+function App() {
+  const { user, logout } = useAuth()
 
-  if (loading) {
-    return <div>Carregando...</div>;
-  }
-
-  return user ? <>{children}</> : <Navigate to="/login" replace />;
-};
-
-const App: React.FC = () => {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route 
-        path="/dashboard" 
-        element={
-          <PrivateRoute>
-            <Dashboard />
-          </PrivateRoute>
-        } 
-      />
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  );
-};
+    <div style={{ padding: "2rem", textAlign: "center" }}>
+      <h1>🚀 Plataforma CEMEAC Educação Híbrida</h1>
 
-export default App;
+      <nav style={{ marginBottom: "1rem" }}>
+        <Link to="/">Início</Link> |{" "}
+        <Link to="/sobre">Sobre</Link> |{" "}
+        <Link to="/dashboard">Dashboard</Link> |{" "}
+        {!user && <Link to="/login">Login</Link>}
+      </nav>
+
+      {user && (
+        <div style={{ marginBottom: "1rem" }}>
+          <p>
+            Usuário: <b>{user.name}</b> ({user.role})
+          </p>
+          <button onClick={logout}>Sair</button>
+        </div>
+      )}
+
+      <Routes>
+        {/* Rotas públicas */}
+        <Route path="/" element={<p>Você está na página inicial ✅</p>} />
+        <Route path="/sobre" element={<p>Esta é a página Sobre 📘</p>} />
+        <Route path="/login" element={<Login />} />
+
+        {/* Rota privada */}
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute roles={["admin", "gestor", "professor", "aluno"]}>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </div>
+  )
+}
+
+export default App

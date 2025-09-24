@@ -1,7 +1,28 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+// frontend/src/contexts/AuthContext.tsx
+import { createContext, useContext, useState, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import api from '../services/api';
-import { User, AuthResponse, LoginCredentials } from '../types';
+
+// Definir interfaces diretamente aqui
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: 'admin' | 'gestor' | 'professor' | 'aluno';
+  school_id: number | null;
+  school?: any;
+  created_at: string;
+}
+
+interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+interface AuthResponse {
+  user: User;
+  token: string;
+}
 
 interface AuthContextType {
   user: User | null;
@@ -22,10 +43,10 @@ export const useAuth = () => {
 };
 
 interface AuthProviderProps {
-  children: ReactNode;
+  children: any; // Simplificando temporariamente
 }
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const queryClient = useQueryClient();
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(
@@ -78,7 +99,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(null);
       setToken(null);
       localStorage.removeItem('auth_token');
-      queryClient.clear(); // Limpar cache do React Query
+      queryClient.clear();
     }
   };
 
