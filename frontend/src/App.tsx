@@ -5,6 +5,7 @@ import { PrivateRoute } from "./components/PrivateRoute"
 // Páginas
 import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
+import AdminDashboard from "./pages/AdminDashboard" // Nova importação
 
 function App() {
   const { user, logout } = useAuth()
@@ -17,6 +18,7 @@ function App() {
         <Link to="/">Início</Link> |{" "}
         <Link to="/sobre">Sobre</Link> |{" "}
         <Link to="/dashboard">Dashboard</Link> |{" "}
+        {user?.role === 'admin' && <Link to="/admin-dashboard">Admin Dashboard</Link>} |{" "}
         {!user && <Link to="/login">Login</Link>}
       </nav>
 
@@ -35,12 +37,22 @@ function App() {
         <Route path="/sobre" element={<p>Esta é a página Sobre 📘</p>} />
         <Route path="/login" element={<Login />} />
 
-        {/* Rota privada */}
+        {/* Rota privada - Dashboard */}
         <Route
           path="/dashboard"
           element={
             <PrivateRoute roles={["admin", "gestor", "professor", "aluno"]}>
               <Dashboard />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Nova rota - Admin Dashboard */}
+        <Route
+          path="/admin-dashboard"
+          element={
+            <PrivateRoute roles={["admin"]}>
+              <AdminDashboard />
             </PrivateRoute>
           }
         />
