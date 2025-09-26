@@ -73,23 +73,54 @@ Implementar CI/CD pipeline
 ## 🏗️ Estrutura do Repositório
 
 ```bash
-Cemeac_Educacao_Hibrida/
-│
-├── backend/              # Backend Laravel
-│   ├── app/              # Código de aplicação Laravel
-│   ├── database/         
-│   │   ├── migrations/   # Estrutura de tabelas
-│   │   ├── seeders/      # População inicial de dados
-│   ├── routes/           # API e web routes
-│   └── tests/            # Testes unitários e de integração
-│
-├── frontend/             # Frontend React + Vite + TS
-│   ├── src/
-│   │   ├── pages/        # Páginas (Login, Dashboard, etc.)
-│   │   └── components/   # Componentes reutilizáveis
-│
-├── docs/                 # Documentação de arquitetura e requisitos
-└── README.md             # Este documento
+Cemeac_Educacao_Hibrida/ 
+├── backend/ # Laravel API 
+│ ├── app/ 
+│ │ ├── Http/ 
+│ │ │ ├── Controllers/ 
+│ │ │ ├── Middleware/ 
+│ │ │ └── Requests/ 
+│ │ ├── Models/ 
+│ │ └── Services/ 
+│ ├── config/ 
+│ ├── database/
+│ │ ├── migrations/ 
+│ │ └── seeders/ 
+│ ├── routes/ 
+│ │ ├── api.php 
+│ │ └── web.php 
+│ ├── resources/ 
+│ │ └── views/ 
+│ ├── tests/ 
+│ └── .env 
+│ ├── frontend/ # React + TypeScript SPA 
+│ ├── public/ 
+│ ├── src/ 
+│ │ ├── assets/ 
+│ │ ├── components/ 
+│ │ ├── pages/ 
+│ │ ├── services/ # API calls 
+│ │ ├── hooks/ 
+│ │ ├── contexts/ 
+│ │ ├── utils/ 
+│ │ ├── types/ 
+│ │ └── App.tsx 
+│ ├── .env 
+│ └── vite.config.ts 
+│ ├── admin-panel/ # Painel administrativo (opcional separado) 
+│ └── (estrutura similar ao frontend) 
+│ ├── docs/ # Documentação técnica e funcional 
+│ ├── arquitetura.md 
+│ ├── escopo.md 
+│ └── api-specs.md 
+│ ├── docker/ # Arquivos de configuração Docker 
+│ ├── nginx/ 
+│ ├── php/ 
+│ └── docker-compose.yml 
+│ ├── .github/ # GitHub Actions para CI/CD 
+│ └── workflows/ 
+│ └── deploy.yml 
+│ └── README.md #
 
 📜 Licença
 Projeto desenvolvido para fins educacionais e de pesquisa.
