@@ -11,65 +11,48 @@ class Activity extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 
-        'description', 
-        'type', 
-        'school_id', 
+        'title',
+        'description',
+        'type',
+        'school_id',
         'content_id',
-        'difficulty',
-        'max_score'
+        'difficulty_level',
+        'estimated_duration',
+        'is_active'
     ];
 
-    // Tipos de atividades permitidas
-    const TYPES = [
-        'verdadeiro_falso', 
-        'multipla_escolha', 
-        'drag_drop', 
-        'subjetiva'
-    ];
+    const TYPES = ['presencial', 'online', 'hibrida'];
+    const DIFFICULTY_LEVELS = ['basico', 'intermediario', 'avancado'];
 
-    // Níveis de dificuldade
-    const DIFFICULTIES = ['facil', 'medio', 'dificil'];
-
-    // Regras de validação
-    public static function rules($id = null)
+    public static function rules()
     {
         return [
             'title' => ['required', 'min:3', 'max:255'],
             'description' => ['nullable', 'max:1000'],
-            'type' => [
-                'required', 
-                Rule::in(self::TYPES)
-            ],
+            'type' => ['required', Rule::in(self::TYPES)],
             'school_id' => ['required', 'exists:schools,id'],
-            'content_id' => ['nullable', 'exists:contents,id'],
-            'difficulty' => [
-                'required', 
-                Rule::in(self::DIFFICULTIES)
-            ],
-            'max_score' => ['required', 'numeric', 'min:0', 'max:100']
+            'difficulty_level' => ['required', Rule::in(self::DIFFICULTY_LEVELS)],
+            'estimated_duration' => ['nullable', 'integer', 'min:0'],
+            'is_active' => ['boolean']
         ];
     }
 
-    // Relacionamento com School
+    // Relacionamentos
     public function school()
     {
         return $this->belongsTo(School::class);
     }
 
-    // Relacionamento com Content
     public function content()
     {
         return $this->belongsTo(Content::class);
     }
 
-    // Relacionamento com StudentActivity
     public function studentActivities()
     {
         return $this->hasMany(StudentActivity::class);
     }
 
-    // Relacionamento com ForumPost
     public function forumPosts()
     {
         return $this->hasMany(ForumPost::class);
